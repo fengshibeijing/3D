@@ -24,7 +24,7 @@ namespace vidkey
 					// 检测是否为新连接设备
 					if (!connected[device])
 					{
-						std::cout << "检测到微动 " << device << " 连接" << std::endl;
+						//std::cout << "检测到微动 " << device << " 连接" << std::endl;
 						//std::cout << "伸出单指可控制屏幕光标移动" << std::endl;
 						connected[device] = true;
 					}
@@ -43,7 +43,10 @@ namespace vidkey
 						
 						// 单手指时，控制屏幕光标
 						std::cout << "\r" << finger->cursor.x << " " << finger->cursor.y;
-			
+						//keybd_event(17,0,0,0);
+						//keybd_event(80,0,0,0);
+						//keybd_event(80,0,KEYEVENTF_KEYUP,0);
+						//keybd_event(17,0,KEYEVENTF_KEYUP,0);
 						if (frame->finger_number>2)
 						{
 							SetCursorPos(
@@ -54,6 +57,8 @@ namespace vidkey
 						if (frame->finger_number==1&&finger->stop==50)
 						{
 							mouse_event(MOUSEEVENTF_LEFTUP,finger->cursor.x,finger->cursor.y,0,0);
+							//ix=finger->cursor.x;
+							//iy=finger->cursor.y;
 							keybd_event(17,0,0,0);
 							keybd_event(80,0,0,0);
 							keybd_event(80,0,KEYEVENTF_KEYUP,0);
@@ -65,6 +70,8 @@ namespace vidkey
 						if (frame->finger_number==2&&finger->stop==50)
 						{
 							mouse_event(MOUSEEVENTF_LEFTUP,finger->cursor.x,finger->cursor.y,0,0);
+							//ix=finger->cursor.x;
+							//iy=finger->cursor.y;
 							keybd_event(17,0,0,0);
 							keybd_event(82,0,0,0);
 							keybd_event(82,0,KEYEVENTF_KEYUP,0);
@@ -72,14 +79,45 @@ namespace vidkey
 							mouse_event(MOUSEEVENTF_LEFTDOWN,finger->cursor.x,finger->cursor.y,0,0);
 							modeflag=1;
 						}
-
+						/*if (frame->finger_number>=3&&modeflag)
+						{
+							mouse_event(MOUSEEVENTF_LEFTDOWN,finger->cursor.x,finger->cursor.y,0,0);
+						}*/
 						if (frame->finger_number>=3&&finger->stop==60)
 						{
 							modeflag=0;
 							mouse_event(MOUSEEVENTF_LEFTUP,finger->cursor.x,finger->cursor.y,0,0);
 							//SetCursorPos(ix,iy);
 						}
+						//if (finger->tap&&finger)
+						//{
 
+						//	mouse_event(MOUSEEVENTF_LEFTUP,finger->cursor.x,finger->cursor.y,0,0);
+
+						//}
+						//if (hand->finger_number<=2)
+						//{
+						//	if (finger->stop>40)
+						//	{
+						//		mouse_event(MOUSEEVENTF_LEFTUP,finger->cursor.x,finger->cursor.y,0,0);
+						//
+						//		mouse_event(MOUSEEVENTF_LEFTDOWN,finger->cursor.x,finger->cursor.y,0,0);
+						//	}
+					
+						//}
+						//if (hand->finger_number>=4)
+						//{
+						//	float x=finger->cursor.x;
+						//	float y=finger->cursor.y;
+						//	if (finger->stop>60)
+						//	{
+						//		//mouse_event(MOUSEEVENTF_LEFTUP,finger->cursor.x,finger->cursor.y,0,0);
+						//		keybd_event(17,0,0,0);
+						//		keybd_event(82,0,0,0);
+						//		keybd_event(82,0,KEYEVENTF_KEYUP,0);
+						//		keybd_event(17,0,KEYEVENTF_KEYUP,0);
+						//		mouse_event(MOUSEEVENTF_LEFTDOWN,finger->cursor.x,finger->cursor.y,0,0);
+						//	}
 						
 					
 						}
@@ -106,7 +144,27 @@ namespace vidkey
 	}
 	}
 
-
+	//void mode1(float a,float b)
+	//{
+	//	mouse_event(MOUSEEVENTF_LEFTUP,a,b,0,0);
+	//	keybd_event(17,0,0,0);
+	//	keybd_event(80,0,0,0);
+	//	keybd_event(80,0,KEYEVENTF_KEYUP,0);
+	//	keybd_event(17,0,KEYEVENTF_KEYUP,0);
+	//	mouse_event(MOUSEEVENTF_LEFTDOWN,a,b,0,0);
+	//	
+	//
+	//}
+	//void mode2(float a,float b)
+	//{
+	//	mouse_event(MOUSEEVENTF_LEFTUP,a,b,0,0);
+	//	keybd_event(17,0,0,0);
+	//	keybd_event(82,0,0,0);
+	//	keybd_event(82,0,KEYEVENTF_KEYUP,0);
+	//	keybd_event(17,0,KEYEVENTF_KEYUP,0);
+	//	mouse_event(MOUSEEVENTF_LEFTDOWN,a,b,0,0);
+	//	
+	//}
 
 
 
@@ -114,7 +172,7 @@ using namespace vidkey;
 int main(int argc, char** argv)
 {
 	while(true)
-		
+		//mouse_event(MOUSEEVENTF_LEFTDOWN,1000,1000,0,0);
 	{
 		loadvid();
 	}
